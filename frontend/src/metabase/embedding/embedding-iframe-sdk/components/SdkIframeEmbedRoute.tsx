@@ -27,6 +27,7 @@ import { PLUGIN_EMBEDDING_IFRAME_SDK } from "metabase/plugins";
 import { useSelector } from "metabase/redux";
 import { getSetting } from "metabase/selectors/settings";
 import { getUserId } from "metabase/selectors/user";
+import { getShowMetabaseLinks } from "metabase/selectors/whitelabel";
 import { Stack } from "metabase/ui";
 
 import { useParamRerenderKey } from "../hooks/use-param-rerender-key";
@@ -374,7 +375,8 @@ const SdkIframeEmbedView = ({
 
 const EmbedBrandingFooter = () => {
   const hasEmbedBranding = useSelector(
-    (state) => !getSetting(state, "hide-embed-branding?"),
+    (state) =>
+      !getSetting(state, "hide-embed-branding?") && getShowMetabaseLinks(state),
   );
 
   if (!hasEmbedBranding) {

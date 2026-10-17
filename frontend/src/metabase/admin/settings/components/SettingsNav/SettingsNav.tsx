@@ -17,7 +17,6 @@ const NavDivider = () => <Divider my="sm" />;
 
 export function SettingsNav() {
   const hasHosting = useHasTokenFeature("hosting");
-  const hasWhitelabel = useHasTokenFeature("whitelabel");
   const hasSaml = useHasTokenFeature("sso_saml");
   const hasJwt = useHasTokenFeature("sso_jwt");
   const hasOidc = useHasTokenFeature("sso_oidc");
@@ -81,17 +80,11 @@ export function SettingsNav() {
       {isAdmin && <CustomVisualizationsNav />}
       <SettingsNavItem path="maps" label={t`Maps`} icon="pinmap" />
       <SettingsNavItem
-        path={!hasWhitelabel ? "whitelabel" : undefined}
         folderPattern="whitelabel"
-        label={
-          <Flex gap="sm" align="center">
-            <span>{t`Appearance`}</span>
-            {!hasWhitelabel && <UpsellGem />}
-          </Flex>
-        }
+        label={t`Appearance`}
         icon="palette"
       >
-        {hasWhitelabel && [
+        {[
           // using an array so that child path detection can access them as direct children
           <SettingsNavItem
             key="branding"

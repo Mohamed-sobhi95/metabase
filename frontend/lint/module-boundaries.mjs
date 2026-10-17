@@ -153,6 +153,7 @@ const elements = [
 
   // feature
   createElement({ type: "feature", name: "admin" }),
+  createElement({ type: "feature", name: "branding" }),
   createElement({ type: "feature", name: "dashboard" }),
   createElement({ type: "feature", name: "data-studio" }),
   createElement({ type: "feature", name: "documents" }),

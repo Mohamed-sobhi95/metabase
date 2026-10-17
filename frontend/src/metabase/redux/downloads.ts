@@ -14,7 +14,7 @@ import { waitUntilNextFramePainted } from "metabase/common/utils/wait-until-next
 import { isEmbeddingSdk } from "metabase/embedding-sdk/config";
 import type { DownloadsState, State } from "metabase/redux/store";
 import { createAsyncThunk } from "metabase/redux/utils";
-import { getTokenFeature } from "metabase/selectors/settings";
+import { getShowMetabaseLinks } from "metabase/selectors/whitelabel";
 import * as Urls from "metabase/urls";
 import { getBasename } from "metabase/utils/basename";
 import { openSaveDialog } from "metabase/utils/dom";
@@ -165,8 +165,7 @@ export const downloadToImage = createAsyncThunk(
     }: { opts: DownloadQueryResultsOpts; id: number },
     { getState },
   ) => {
-    const isWhitelabeled = getTokenFeature(getState(), "whitelabel");
-    const includeBranding = !isWhitelabeled;
+    const includeBranding = getShowMetabaseLinks(getState());
     const fileName = getChartFileName(question, includeBranding);
 
     const chartSelector =
@@ -193,8 +192,7 @@ export const downloadDashboardToPdf = createAsyncThunk(
     { dashboard, id }: { dashboard: Dashboard; id: number },
     { getState },
   ) => {
-    const isWhitelabeled = getTokenFeature(getState(), "whitelabel");
-    const includeBranding = !isWhitelabeled;
+    const includeBranding = getShowMetabaseLinks(getState());
     const cardNodeSelector = `#${DASHBOARD_PDF_EXPORT_ROOT_ID}`;
     const fileName = getDashboardPdfFileName(dashboard, includeBranding);
 

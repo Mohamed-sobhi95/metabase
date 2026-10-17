@@ -33,6 +33,7 @@ import { syncHistoryWithStore } from "react-router-redux";
 import { initializePlugins } from "ee-plugins";
 import { AppThemeProvider } from "metabase/AppThemeProvider";
 import { createSnowplowTracker } from "metabase/analytics";
+import { initializeBranding } from "metabase/branding";
 import { ModifiedBackend } from "metabase/common/components/dnd/ModifiedBackend";
 import registerDashboardVisualizations from "metabase/dashboard/visualizations/register";
 import { initializeInteractiveEmbedding } from "metabase/embedding/interactive-embedding";
@@ -63,6 +64,8 @@ const browserHistory = useRouterHistory(createHistory)({
   basename: getBasename(),
 });
 
+// OSS branding first, so a licensed EE whitelabel plugin can still override it
+initializeBranding();
 initializePlugins();
 
 function _init(reducers, getRoutes, callback) {

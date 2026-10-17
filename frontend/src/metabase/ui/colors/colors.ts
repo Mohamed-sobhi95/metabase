@@ -7,10 +7,7 @@ import { deriveFullMetabaseTheme } from "./derive-theme";
 import type { MetabaseColorKey } from "./types/color-keys";
 
 const win = typeof window !== "undefined" ? window : ({} as Window);
-const tokenFeatures = win.MetabaseBootstrap?.["token-features"] ?? {};
-const shouldWhitelabel = !!tokenFeatures["whitelabel"];
-const whitelabelColors =
-  (shouldWhitelabel && win.MetabaseBootstrap?.["application-colors"]) || {};
+const whitelabelColors = win.MetabaseBootstrap?.["application-colors"] || {};
 
 const baseColors = getBaseColorsForThemeDefinitionOnly();
 

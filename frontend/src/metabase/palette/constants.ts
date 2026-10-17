@@ -96,11 +96,9 @@ export const getAdminSettingsSections = (
   },
   "whitelabel/branding": {
     name: t`Branding`,
-    hidden: !settings["token-features"].whitelabel,
   },
   "whitelabel/conceal-metabase": {
     name: t`Conceal metabase`,
-    hidden: !settings["token-features"].whitelabel,
   },
   cloud: {
     name: t`Cloud`,

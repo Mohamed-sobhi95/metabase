@@ -17,7 +17,6 @@
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "Metabase")
 
 (defsetting site-name
@@ -81,7 +80,6 @@
   :encryption :no
   :visibility :public
   :export?    true
-  :feature    :whitelabel
   :type       :keyword
   :default    :doing-science
   :setter     (fn [new-value]
@@ -102,7 +100,6 @@
   :visibility :public
   :export?    true
   :type       :json
-  :feature    :whitelabel
   :default    {}
   :audit      :getter
   :doc "To change the user interface colors:
@@ -137,7 +134,6 @@ To change the chart colors:
   :export?    true
   :type       :string
   :default    "Lato"
-  :feature    :whitelabel
   :audit      :getter
   :setter     (fn [new-value]
                 (when new-value
@@ -152,7 +148,6 @@ To change the chart colors:
   :export?    true
   :type       :json
   :audit      :getter
-  :feature    :whitelabel
   :doc "Example value:
 
 ```
@@ -189,7 +184,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "app/assets/img/logo.svg"
   :doc "Inline styling and inline scripts are not supported.")
 
@@ -200,7 +194,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "app/assets/img/favicon.ico")
 
 (defsetting show-metabot
@@ -209,7 +202,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :boolean
   :audit      :getter
-  :feature    :whitelabel
   :default    true
   :doc        false)
 
@@ -220,7 +212,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "default")
 
 (defsetting login-page-illustration-custom
@@ -229,8 +220,7 @@ See [fonts](../configuring-metabase/fonts.md).")
   :visibility :public
   :export?    true
   :type       :string
-  :audit      :getter
-  :feature    :whitelabel)
+  :audit      :getter)
 
 (defsetting landing-page-illustration
   (deferred-tru "Options for displaying the illustration on the landing page.")
@@ -239,7 +229,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "default")
 
 (defsetting landing-page-illustration-custom
@@ -248,8 +237,7 @@ See [fonts](../configuring-metabase/fonts.md).")
   :visibility :authenticated
   :export?    true
   :type       :string
-  :audit      :getter
-  :feature    :whitelabel)
+  :audit      :getter)
 
 (defsetting no-data-illustration
   (deferred-tru "Options for displaying the illustration when there are no results after running a question.")
@@ -258,7 +246,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "default")
 
 (defsetting no-data-illustration-custom
@@ -267,8 +254,7 @@ See [fonts](../configuring-metabase/fonts.md).")
   :visibility :public
   :export?    true
   :type       :string
-  :audit      :getter
-  :feature    :whitelabel)
+  :audit      :getter)
 
 (defsetting no-object-illustration
   (deferred-tru "Options for displaying the illustration when there are no results after searching.")
@@ -277,7 +263,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :export?    true
   :type       :string
   :audit      :getter
-  :feature    :whitelabel
   :default    "default")
 
 (defsetting no-object-illustration-custom
@@ -286,8 +271,7 @@ See [fonts](../configuring-metabase/fonts.md).")
   :visibility :public
   :export?    true
   :type       :string
-  :audit      :getter
-  :feature    :whitelabel)
+  :audit      :getter)
 
 (def ^:private help-link-options
   #{:metabase :hidden :custom})
@@ -301,7 +285,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :type       :keyword
   :audit      :getter
   :visibility :public
-  :feature    :whitelabel
   :default    :metabase
   :setter     (fn [value]
                 (when-not (help-link-options (keyword value))
@@ -329,7 +312,6 @@ See [fonts](../configuring-metabase/fonts.md).")
   :type       :string
   :audit      :getter
   :default   "https://www.metabase.com/help/premium"
-  :feature    :whitelabel
   :setter     (fn [new-value]
                 (let [new-value-string (str new-value)]
                   (validate-help-url new-value-string)
@@ -340,8 +322,7 @@ See [fonts](../configuring-metabase/fonts.md).")
   :type       :boolean
   :default    true
   :visibility :public
-  :audit      :getter
-  :feature    :whitelabel)
+  :audit      :getter)
 
 (def avaialable-number-separators
   "Number separators that are available to use in uploads csv parsing. Values match what is implemented

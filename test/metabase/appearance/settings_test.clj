@@ -22,12 +22,9 @@
              Exception #"Invalid help link option"
              (appearance.settings/help-link! :invalid)))))
     (mt/with-premium-features #{}
-      (testing "When whitelabeling is not enabled, help-link setting cannot be set, and always returns :metabase"
-        (is (thrown-with-msg?
-             clojure.lang.ExceptionInfo
-             #"Setting help-link is not enabled because feature :whitelabel is not available"
-             (appearance.settings/help-link! :hidden)))
-        (is (= :metabase (appearance.settings/help-link)))))))
+      (testing "Branding is not paywalled: help-link can be set without the :whitelabel feature"
+        (appearance.settings/help-link! :hidden)
+        (is (= :hidden (appearance.settings/help-link)))))))
 
 (deftest application-font-validation-test
   (mt/discard-setting-changes [application-font]
@@ -40,11 +37,9 @@
              Exception #"Invalid font"
              (appearance.settings/application-font! "Comic Sans")))))
     (mt/with-premium-features #{}
-      (testing "application-font cannot be set when whitelabeling is not enabled"
-        (is (thrown-with-msg?
-             clojure.lang.ExceptionInfo
-             #"Setting application-font is not enabled because feature :whitelabel is not available"
-             (appearance.settings/application-font! "Open Sans")))))))
+      (testing "Branding is not paywalled: application-font can be set without the :whitelabel feature"
+        (appearance.settings/application-font! "Open Sans")
+        (is (= "Open Sans" (appearance.settings/application-font)))))))
 
 (deftest validate-help-url-test
   (testing "validate-help-url accepts valid URLs with HTTP or HTTPS protocols"
@@ -89,12 +84,9 @@
            #"Please make sure this is a valid URL"
            (appearance.settings/help-link-custom-destination! "mailto:help@metabase")))))
   (mt/with-premium-features #{}
-    (testing "When whitelabeling is not enabled, help-link-custom-destination cannot be set, and always returns its default"
-      (is (thrown-with-msg?
-           clojure.lang.ExceptionInfo
-           #"Setting help-link-custom-destination is not enabled because feature :whitelabel is not available"
-           (appearance.settings/help-link-custom-destination! "http://www.metabase.com")))
-      (is (= "https://www.metabase.com/help/premium" (appearance.settings/help-link-custom-destination))))))
+    (testing "Branding is not paywalled: help-link-custom-destination can be set without the :whitelabel feature"
+      (appearance.settings/help-link-custom-destination! "http://www.example.com")
+      (is (= "http://www.example.com" (appearance.settings/help-link-custom-destination))))))
 
 (deftest landing-page-setting-test
   (mt/with-temporary-setting-values [site-url "http://localhost:3000"]
@@ -145,12 +137,9 @@
         (appearance.settings/show-metabase-links! false)
         (is (= false (appearance.settings/show-metabase-links)))))
     (mt/with-premium-features #{}
-      (testing "When whitelabeling is not enabled, show-metabase-links setting cannot be set, and always returns true"
-        (is (thrown-with-msg?
-             clojure.lang.ExceptionInfo
-             #"Setting show-metabase-links is not enabled because feature :whitelabel is not available"
-             (appearance.settings/show-metabase-links! true)))
-        (is (true? (appearance.settings/show-metabase-links)))))))
+      (testing "Branding is not paywalled: show-metabase-links can be set without the :whitelabel feature"
+        (appearance.settings/show-metabase-links! false)
+        (is (= false (appearance.settings/show-metabase-links)))))))
 
 (deftest loading-message-test
   (mt/with-premium-features #{:whitelabel}
